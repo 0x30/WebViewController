@@ -18,10 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwz-p6-xYb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwz-p6-xYb" customClass="WebViewNavBar" customModule="WebViewController">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="107"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-k9-nmE" customClass="WebViewNavBar" customModule="WebViewController">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-k9-nmE">
                                         <rect key="frame" x="0.0" y="59" width="393" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnU-rw-ZHW">
@@ -74,12 +74,6 @@
                                             <constraint firstAttribute="trailing" secondItem="Tkl-Zj-x06" secondAttribute="trailing" id="nBl-fk-j0d"/>
                                             <constraint firstItem="Dg9-Gc-KsU" firstAttribute="top" secondItem="RM9-k9-nmE" secondAttribute="top" id="owf-DO-hHD"/>
                                         </constraints>
-                                        <connections>
-                                            <outlet property="cancelButton" destination="WnU-rw-ZHW" id="ezO-kz-KYy"/>
-                                            <outlet property="closeButton" destination="Dg9-Gc-KsU" id="3r2-4C-44S"/>
-                                            <outlet property="refreshButton" destination="Tkl-Zj-x06" id="aHI-yk-VGv"/>
-                                            <outlet property="titleLabel" destination="9rh-C7-Qi7" id="Fjo-AV-Q0Q"/>
-                                        </connections>
                                     </view>
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="gEh-wI-woj"/>
@@ -90,6 +84,12 @@
                                     <constraint firstItem="gEh-wI-woj" firstAttribute="trailing" secondItem="RM9-k9-nmE" secondAttribute="trailing" id="hss-jf-SUR"/>
                                     <constraint firstItem="RM9-k9-nmE" firstAttribute="top" secondItem="gEh-wI-woj" secondAttribute="top" id="wE3-pa-J0F"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="cancelButton" destination="WnU-rw-ZHW" id="34E-P0-47z"/>
+                                    <outlet property="closeButton" destination="Dg9-Gc-KsU" id="Lmr-PH-TuU"/>
+                                    <outlet property="refreshButton" destination="Tkl-Zj-x06" id="XWk-fa-FOP"/>
+                                    <outlet property="titleLabel" destination="9rh-C7-Qi7" id="f1t-h9-y4L"/>
+                                </connections>
                             </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2z-LD-bd9">
                                 <rect key="frame" x="0.0" y="107" width="393" height="745"/>
@@ -113,7 +113,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="navBar" destination="RM9-k9-nmE" id="wZp-vF-oh6"/>
+                        <outlet property="navBar" destination="mwz-p6-xYb" id="pwx-KG-kg5"/>
                         <outlet property="webView" destination="O2z-LD-bd9" id="jpQ-Ks-OMQ"/>
                     </connections>
                 </viewController>
