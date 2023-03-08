@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mTc-y2-kEq">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Web View Controller-->
+        <scene sceneID="KBa-Qh-ZUE">
+            <objects>
+                <viewController storyboardIdentifier="BrowserViewController" id="mTc-y2-kEq" customClass="WebViewController" customModule="WebViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Yy-KW-LUA">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwz-p6-xYb">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="107"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RM9-k9-nmE" customClass="WebViewNavBar" customModule="WebViewController">
+                                        <rect key="frame" x="0.0" y="59" width="393" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnU-rw-ZHW">
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="Bgh-Lf-KyZ"/>
+                                                    <constraint firstAttribute="height" constant="48" id="dSc-gd-qBb"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <imageReference key="image" image="chevron.left" catalog="system" symbolScale="medium"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-Gc-KsU">
+                                                <rect key="frame" x="48" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="LKd-bA-pWR"/>
+                                                    <constraint firstAttribute="width" constant="48" id="LfW-bX-aHI"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="medium"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-C7-Qi7">
+                                                <rect key="frame" x="96" y="0.0" width="201" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tkl-Zj-x06">
+                                                <rect key="frame" x="345" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="hXb-9Y-TmY"/>
+                                                    <constraint firstAttribute="height" constant="48" id="uYW-fq-DkZ"/>
+                                                </constraints>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <imageReference key="image" image="goforward" catalog="system" symbolScale="medium"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="9rh-C7-Qi7" firstAttribute="centerX" secondItem="RM9-k9-nmE" secondAttribute="centerX" id="2m6-YB-dPK"/>
+                                            <constraint firstAttribute="bottom" secondItem="9rh-C7-Qi7" secondAttribute="bottom" id="ECd-Ao-02p"/>
+                                            <constraint firstItem="9rh-C7-Qi7" firstAttribute="top" secondItem="RM9-k9-nmE" secondAttribute="top" id="LG4-Cw-sX8"/>
+                                            <constraint firstAttribute="bottom" secondItem="WnU-rw-ZHW" secondAttribute="bottom" id="Mmo-bK-ac8"/>
+                                            <constraint firstItem="Dg9-Gc-KsU" firstAttribute="leading" secondItem="WnU-rw-ZHW" secondAttribute="trailing" id="P8q-iV-8Gt"/>
+                                            <constraint firstItem="WnU-rw-ZHW" firstAttribute="top" secondItem="RM9-k9-nmE" secondAttribute="top" id="PFc-Je-TX3"/>
+                                            <constraint firstItem="Tkl-Zj-x06" firstAttribute="top" secondItem="RM9-k9-nmE" secondAttribute="top" id="Vcq-Fg-UuA"/>
+                                            <constraint firstItem="9rh-C7-Qi7" firstAttribute="leading" secondItem="Dg9-Gc-KsU" secondAttribute="trailing" id="izI-IS-FKp"/>
+                                            <constraint firstItem="WnU-rw-ZHW" firstAttribute="leading" secondItem="RM9-k9-nmE" secondAttribute="leading" id="jJH-eu-yMm"/>
+                                            <constraint firstAttribute="trailing" secondItem="Tkl-Zj-x06" secondAttribute="trailing" id="nBl-fk-j0d"/>
+                                            <constraint firstItem="Dg9-Gc-KsU" firstAttribute="top" secondItem="RM9-k9-nmE" secondAttribute="top" id="owf-DO-hHD"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="cancelButton" destination="WnU-rw-ZHW" id="ezO-kz-KYy"/>
+                                            <outlet property="closeButton" destination="Dg9-Gc-KsU" id="3r2-4C-44S"/>
+                                            <outlet property="refreshButton" destination="Tkl-Zj-x06" id="aHI-yk-VGv"/>
+                                            <outlet property="titleLabel" destination="9rh-C7-Qi7" id="Fjo-AV-Q0Q"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="gEh-wI-woj"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="RM9-k9-nmE" secondAttribute="bottom" id="Doo-Ez-EMZ"/>
+                                    <constraint firstItem="RM9-k9-nmE" firstAttribute="leading" secondItem="gEh-wI-woj" secondAttribute="leading" id="RbY-e9-glZ"/>
+                                    <constraint firstItem="gEh-wI-woj" firstAttribute="trailing" secondItem="RM9-k9-nmE" secondAttribute="trailing" id="hss-jf-SUR"/>
+                                    <constraint firstItem="RM9-k9-nmE" firstAttribute="top" secondItem="gEh-wI-woj" secondAttribute="top" id="wE3-pa-J0F"/>
+                                </constraints>
+                            </view>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2z-LD-bd9">
+                                <rect key="frame" x="0.0" y="107" width="393" height="745"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="VcU-jJ-Ug0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="O2z-LD-bd9" secondAttribute="bottom" id="9aK-WE-XkG"/>
+                            <constraint firstItem="O2z-LD-bd9" firstAttribute="top" secondItem="mwz-p6-xYb" secondAttribute="bottom" id="DMm-7N-XND"/>
+                            <constraint firstItem="O2z-LD-bd9" firstAttribute="leading" secondItem="1Yy-KW-LUA" secondAttribute="leading" id="DwL-sH-pik"/>
+                            <constraint firstAttribute="trailing" secondItem="O2z-LD-bd9" secondAttribute="trailing" id="bEm-Wm-5Xc"/>
+                            <constraint firstItem="mwz-p6-xYb" firstAttribute="leading" secondItem="1Yy-KW-LUA" secondAttribute="leading" id="lmp-xZ-Oak"/>
+                            <constraint firstItem="mwz-p6-xYb" firstAttribute="top" secondItem="1Yy-KW-LUA" secondAttribute="top" id="mER-pX-g3b"/>
+                            <constraint firstAttribute="trailing" secondItem="mwz-p6-xYb" secondAttribute="trailing" id="pOg-nO-KMF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navBar" destination="RM9-k9-nmE" id="wZp-vF-oh6"/>
+                        <outlet property="webView" destination="O2z-LD-bd9" id="jpQ-Ks-OMQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oy4-R9-GpA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1153.6231884057972" y="140.625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
+        <image name="goforward" catalog="system" width="119" height="128"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
