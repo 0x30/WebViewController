@@ -9,7 +9,7 @@ import RxWebKit
 
 public class WebViewController: UIViewController {
     /// WebView 配置对象
-    var config: WebViewControllerConfig!
+    var config: Config!
 
     @IBOutlet var webView: WKWebView!
     @IBOutlet var navBar: WebViewNavBar!
@@ -91,7 +91,13 @@ public extension WebViewController {
     /// 工厂方法获取一个 WebViewController
     /// - Returns: WebViewController 实例
     static func viewController(with configData: Data) -> WebViewController? {
-        guard let config = WebViewControllerConfig.initSelf(configData) else { return nil }
+        guard let config = WebViewController.Config.initSelf(configData) else { return nil }
+        return viewController(with: config)
+    }
+    
+    /// 工厂方法获取一个 WebViewController
+    /// - Returns: WebViewController 实例
+    static func viewController(with config: WebViewController.Config) -> WebViewController? {
         guard let viewController = UIStoryboard(name: "Storyboard", bundle: Bundle.module).instantiateInitialViewController() as? WebViewController else { return nil }
 
         viewController.config = config

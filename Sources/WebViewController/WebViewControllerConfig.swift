@@ -8,44 +8,46 @@
 import UIKit
 import WebKit
 
-struct WebViewControllerConfig: Decodable {
-    /// 链接
-    private var url: String?
-    /// 标题
-    var title: String?
-    /// 新推出 status Bar 样式
-    private var barStatusStyle = 0
-    /// 导航栏 背景颜色
-    private var barBackHexColor: String?
-    /// 导航栏 文字颜色
-    private var barTintHexColor: String?
+public extension WebViewController {
+    struct Config: Codable {
+        /// 链接
+        private var url: String?
+        /// 标题
+        var title: String?
+        /// 新推出 status Bar 样式
+        private var barStatusStyle = 0
+        /// 导航栏 背景颜色
+        private var barBackHexColor: String?
+        /// 导航栏 文字颜色
+        private var barTintHexColor: String?
 
-    /// 页面加载完成 需要执行的 js 代码
-    private var javaScript: String?
+        /// 页面加载完成 需要执行的 js 代码
+        private var javaScript: String?
 
-    /// 允许打开的 scheme 集合
-    var allowScheme: [String] = []
-    var appOpenScheme: [String] = []
-    
-    /// javaScript 和 native 交互的 bridge 名称
-    var scriptMessageName: String?
+        /// 允许打开的 scheme 集合
+        var allowScheme: [String] = []
+        var appOpenScheme: [String] = []
 
-    /// 消息交互
-    /// 如果存在的话，需要处理 baimaodai 消息监听 js 交互
-    var messageCallback: String?
+        /// javaScript 和 native 交互的 bridge 名称
+        var scriptMessageName: String?
 
-    /// 额外配置项
-    var allowsLinkPreview = false
-    var allowsBackForwardNavigationGestures = false
-    // 是否允许 app 打开 UniversalLinks
-    var allowUniversalLinksOpenApp = false
+        /// 消息交互
+        /// 如果存在的话，需要处理 baimaodai 消息监听 js 交互
+        var messageCallback: String?
 
-    static func initSelf(_ data: Data) -> Self? {
-        try? JSONDecoder().decode(self.self, from: data)
+        /// 额外配置项
+        var allowsLinkPreview = false
+        var allowsBackForwardNavigationGestures = false
+        // 是否允许 app 打开 UniversalLinks
+        var allowUniversalLinksOpenApp = false
+
+        static func initSelf(_ data: Data) -> Self? {
+            try? JSONDecoder().decode(self.self, from: data)
+        }
     }
 }
 
-extension WebViewControllerConfig {
+extension WebViewController.Config {
     var urlRequest: URLRequest? {
         guard let url = url, let url = URL(string: url) else { return nil }
         return URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: 30)
@@ -71,7 +73,7 @@ extension WebViewControllerConfig {
     }
 }
 
-extension WebViewControllerConfig {
+extension WebViewController.Config {
     // 配置 webview
     func apply(webView: WKWebView) {
         webView.allowsLinkPreview = allowsLinkPreview
