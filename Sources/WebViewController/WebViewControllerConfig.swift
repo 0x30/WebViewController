@@ -33,7 +33,7 @@ public extension WebViewController {
 
         /// 消息交互
         /// 如果存在的话，需要处理 baimaodai 消息监听 js 交互
-        var messageCallback: String?
+        public var messageCallback: String?
 
         /// 额外配置项
         var allowsLinkPreview = false
