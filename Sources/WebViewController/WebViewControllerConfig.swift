@@ -54,7 +54,14 @@ extension WebViewController.Config {
     }
 
     var statusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle(rawValue: barStatusStyle) ?? .default
+        switch barStatusStyle {
+        case 0:
+            return UIStatusBarStyle.lightContent
+        case 1:
+            return UIStatusBarStyle.darkContent
+        default:
+            return UIStatusBarStyle.default
+        }
     }
 
     var barBackColor: UIColor {
