@@ -49,6 +49,12 @@ public class WebViewController: UIViewController {
         webView.uiDelegate = self
         webView.navigationDelegate = self
 
+        #if DEBUG
+            if #available(iOS 16.4, *) {
+                webView.isInspectable = true
+            }
+        #endif
+
         // 配置 navView
         let (close, refresh, cancel) = navBar.config(config.barBackColor,
                                                      config.barTintColor,
@@ -94,7 +100,7 @@ public extension WebViewController {
         guard let config = WebViewController.Config.initSelf(configData) else { return nil }
         return viewController(with: config)
     }
-    
+
     /// 工厂方法获取一个 WebViewController
     /// - Returns: WebViewController 实例
     static func viewController(with config: WebViewController.Config) -> WebViewController? {
