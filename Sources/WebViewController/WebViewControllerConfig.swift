@@ -98,7 +98,7 @@ extension WebViewController.Config {
     /// 检查是否可以打开该链接
     /// - Parameter url: 链接地址
     /// - Returns: 授权令
-    func detect(url: URL?) async -> WKNavigationActionPolicy {
+    @MainActor func detect(url: URL?) async -> WKNavigationActionPolicy {
         guard let url = url, let scheme = url.scheme else { return .cancel }
 
         // 如果是 itunes.apple.com 的网址
