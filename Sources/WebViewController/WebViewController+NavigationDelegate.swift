@@ -17,6 +17,10 @@ extension WebViewController: WKNavigationDelegate {
         }
         return nil
     }
+    
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction) async -> WKNavigationActionPolicy {
+        return await config.detect(url: navigationAction.request.url)
+    }
 
     // 加载完成
     public func webView(_: WKWebView, didFinish _: WKNavigation!) {}
