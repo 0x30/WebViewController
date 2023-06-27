@@ -39,10 +39,31 @@ public extension WebViewController {
         var allowsLinkPreview = false
         var allowsBackForwardNavigationGestures = false
         // 是否允许 app 打开 UniversalLinks
-        var allowUniversalLinksOpenApp = false
+        public var allowUniversalLinksOpenApp = false
 
         static func initSelf(_ data: Data) -> Self? {
             try? JSONDecoder().decode(self.self, from: data)
+        }
+
+        private enum CodingKeys: CodingKey {
+            case url
+            case title
+            case barStatusStyle
+            case barBackHexColor
+            case barTintHexColor
+            case javaScript
+            case allowScheme
+            case appOpenScheme
+            case scriptMessageName
+            case messageCallback
+            case allowsLinkPreview
+            case allowsBackForwardNavigationGestures
+            case allowUniversalLinksOpenApp
+        }
+
+        private var preDetectUrl: ((_ url: URL) async -> WKNavigationActionPolicy?)? = nil
+        public mutating func setDetectUrl(block: @escaping (_ url: URL) async -> WKNavigationActionPolicy?) {
+            preDetectUrl = block
         }
     }
 }
@@ -100,6 +121,10 @@ extension WebViewController.Config {
     /// - Returns: 授权令
     @MainActor func detect(url: URL?) async -> WKNavigationActionPolicy {
         guard let url = url, let scheme = url.scheme else { return .cancel }
+        
+        if let result = await preDetectUrl?(url) {
+            return result
+        }
 
         // 如果是 itunes.apple.com 的网址
         if let host = url.host, host == "itunes.apple.com" {
@@ -121,7 +146,8 @@ extension WebViewController.Config {
 
         // 如果 允许 加载 请求
         if allowScheme.contains(scheme) {
-            return .allow
+            // _WKNavigationActionPolicyAllowWithoutTryingAppLink
+            return WKNavigationActionPolicy(rawValue: WKNavigationActionPolicy.allow.rawValue + 2) ?? .allow
         }
         return .cancel
     }
