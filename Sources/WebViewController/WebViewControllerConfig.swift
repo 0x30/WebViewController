@@ -35,6 +35,9 @@ public extension WebViewController {
         /// 如果存在的话，需要处理 baimaodai 消息监听 js 交互
         public var messageCallback: String?
 
+        /// 支付宝 消息传递
+        public var alipayCallBack: String?
+        
         /// 额外配置项
         var allowsLinkPreview = false
         var allowsBackForwardNavigationGestures = false
