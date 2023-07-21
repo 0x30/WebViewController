@@ -60,6 +60,7 @@ public extension WebViewController {
             case scriptMessageName
             case messageCallback
             case allowsLinkPreview
+            case alipayCallBack
             case allowsBackForwardNavigationGestures
             case allowUniversalLinksOpenApp
         }
