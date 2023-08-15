@@ -13,15 +13,18 @@ class BrowserPresentedAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) else {
+        guard let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to),
+              let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) else {
             return transitionContext.completeTransition(false)
         }
 
         toViewController.view.frame = transitionContext.finalFrame(for: toViewController)
         transitionContext.containerView.addSubview(toViewController.view)
         toViewController.view.transform = toViewController.view.transform.translatedBy(x: toViewController.view.frame.width, y: 0)
+
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, usingSpringWithDamping: 0.98, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseOut) {
             toViewController.view.transform = .identity
+            fromViewController.view.transform = fromViewController.view.transform.translatedBy(x: -fromViewController.view.frame.width / 2, y: 0)
         } completion: { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
@@ -29,6 +32,13 @@ class BrowserPresentedAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
 }
 
 class BrowserDismissedAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+    let isInteraction: Bool
+
+    init(_ isInteraction: Bool) {
+        self.isInteraction = isInteraction
+        super.init()
+    }
+
     func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
@@ -43,11 +53,24 @@ class BrowserDismissedAnimatedTransitioning: NSObject, UIViewControllerAnimatedT
 
         transitionContext.containerView.insertSubview(toViewController.view, at: 0)
 
-        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, usingSpringWithDamping: 0.98, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseOut) {
-            fromViewController.view.transform = fromViewController.view.transform.translatedBy(x: fromViewController.view.frame.width, y: 0)
-        } completion: { _ in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            fromViewController.endAppearanceTransition()
+        if isInteraction {
+            UIView.animate(withDuration: transitionDuration(using: transitionContext)) {
+                toViewController.view.transform = .identity
+                fromViewController.view.transform = fromViewController.view.transform.translatedBy(x: fromViewController.view.frame.width, y: 0)
+            } completion: { _ in
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                if !transitionContext.transitionWasCancelled {
+                    fromViewController.endAppearanceTransition()
+                }
+            }
+        } else {
+            UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, usingSpringWithDamping: 0.98, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseOut) {
+                toViewController.view.transform = .identity
+                fromViewController.view.transform = fromViewController.view.transform.translatedBy(x: fromViewController.view.frame.width, y: 0)
+            } completion: { _ in
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                fromViewController.endAppearanceTransition()
+            }
         }
     }
 }
@@ -58,6 +81,13 @@ extension WebViewController: UIViewControllerTransitioningDelegate {
     }
 
     public func animationController(forDismissed _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return BrowserDismissedAnimatedTransitioning()
+        return BrowserDismissedAnimatedTransitioning(panDismissDrivenInteractiveTransition != nil)
+    }
+
+    public func interactionControllerForDismissal(using _: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        if config.allowPanGestureInteractionBack {
+            return panDismissDrivenInteractiveTransition
+        }
+        return nil
     }
 }

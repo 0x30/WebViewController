@@ -11,6 +11,10 @@ public class WebViewController: UIViewController {
     /// WebView 配置对象
     var config: Config!
 
+    /// 滑动手势
+    private var panScreenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer()
+    public var panDismissDrivenInteractiveTransition: UIPercentDrivenInteractiveTransition? = nil
+
     @IBOutlet var webView: WKWebView!
     @IBOutlet var navBar: WebViewNavBar!
 
@@ -90,6 +94,11 @@ public class WebViewController: UIViewController {
         .disposed(by: disposeBag)
 
         config.apply(webView: webView)
+
+        webView.addGestureRecognizer(panScreenEdgePanGestureRecognizer)
+        panScreenEdgePanGestureRecognizer.edges = .left
+        panScreenEdgePanGestureRecognizer.delegate = self
+        panScreenEdgePanGestureRecognizer.addTarget(self, action: #selector(panHandle(_:)))
     }
 }
 
@@ -111,5 +120,32 @@ public extension WebViewController {
         viewController.transitioningDelegate = viewController
 
         return viewController
+    }
+}
+
+extension WebViewController: UIGestureRecognizerDelegate {
+    public func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
+        return config.allowPanGestureInteractionBack && !webView.canGoBack
+    }
+
+    @objc func panHandle(_ sender: UIScreenEdgePanGestureRecognizer) {
+        switch sender.state {
+        case .possible:
+            break
+        case .began:
+            panDismissDrivenInteractiveTransition = UIPercentDrivenInteractiveTransition()
+            dismiss(animated: true)
+        case .changed:
+            let progress = sender.translation(in: view).x / view.frame.width
+            panDismissDrivenInteractiveTransition?.update(progress)
+        default:
+            let progress = sender.location(in: sender.view).x / view.frame.width
+            if progress > 0.5 || sender.velocity(in: sender.view).x > 800 {
+                panDismissDrivenInteractiveTransition?.finish()
+            } else {
+                panDismissDrivenInteractiveTransition?.cancel()
+                panDismissDrivenInteractiveTransition = nil
+            }
+        }
     }
 }

@@ -41,6 +41,8 @@ public extension WebViewController {
         /// 额外配置项
         var allowsLinkPreview = false
         var allowsBackForwardNavigationGestures = false
+        /// 是否可以滑动 返回页面
+        var allowPanGestureInteractionBack = true
         // 是否允许 app 打开 UniversalLinks
         public var allowUniversalLinksOpenApp = false
 
@@ -63,6 +65,7 @@ public extension WebViewController {
             case alipayCallBack
             case allowsBackForwardNavigationGestures
             case allowUniversalLinksOpenApp
+            case allowPanGestureInteractionBack
         }
 
         private var preDetectUrl: ((_ url: URL) async -> WKNavigationActionPolicy?)? = nil
