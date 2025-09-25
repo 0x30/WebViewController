@@ -28,6 +28,7 @@ public class WebViewController: UIViewController {
     }
 
     override public func viewDidDisappear(_ animated: Bool) {
+        browserMessaggePublishRelay.accept(WebViewControllerMessage(type: .close).jsonString)
         super.viewDidDisappear(animated)
         webView.configuration.userContentController.removeAllUserScripts()
     }
@@ -85,7 +86,6 @@ public class WebViewController: UIViewController {
         // merge 关闭 刷新 等操作 并发出消息 绑定到 browserMessaggePublishRelay
         Observable.merge([
             scriptMessage,
-            closeShare.map { _ in WebViewControllerMessage(type: .close) },
             cancelSahre.map { _ in WebViewControllerMessage(type: .cancel) },
             refreshShare.map { _ in WebViewControllerMessage(type: .refresh) },
         ])
