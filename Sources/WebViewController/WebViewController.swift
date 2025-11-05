@@ -59,6 +59,13 @@ public class WebViewController: UIViewController {
                 webView.isInspectable = true
             }
         #endif
+        
+        if config.isHiddenNavBar {
+            navBar.isHidden = true
+            webView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        }else{
+            webView.topAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+        }
 
         // 配置 navView
         let (close, refresh, cancel) = navBar.config(config.barBackColor,

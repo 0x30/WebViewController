@@ -20,6 +20,8 @@ public extension WebViewController {
         private var barBackHexColor: String?
         /// 导航栏 文字颜色
         private var barTintHexColor: String?
+        /// 是否隐藏 导航栏
+        var isHiddenNavBar = false
 
         /// 页面加载完成 需要执行的 js 代码
         private var javaScript: String?
