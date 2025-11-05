@@ -58,6 +58,7 @@ public extension WebViewController {
             case barStatusStyle
             case barBackHexColor
             case barTintHexColor
+            case isHiddenNavBar
             case javaScript
             case allowScheme
             case appOpenScheme
